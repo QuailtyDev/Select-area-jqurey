@@ -17,11 +17,11 @@
             $('img#example').selectAreas({
                 minSize: [10, 10],
                 onChanged: debugQtyAreas,
-                width: 500,
+                width: 400,
                 areas: [
                     {
-                        x: 285,
-                        y: 318,
+                        x: 205,
+                        y: 218,
                         width: 140,
                         height: 200,
                     }
@@ -30,15 +30,17 @@
         });
 
         function debugQtyAreas(event, id, areas) {
-            console.log(areas.length + " areas", arguments);
             const selectedArea = areas[0];
-
-            console.log(id);
+            console.log(event)
             var relativeAreas = $('img#example').selectAreas('relativeAreas')[0];
             console.log(relativeAreas);
 
-            $('#x_lower').text(selectedArea['x'])
-            $('#y_lower').text(selectedArea['y'])
+            $('#x_upper').text(Math.round(selectedArea['x'] * 1200 / event.target.clientWidth))
+            $('#y_upper').text(Math.round(selectedArea['y'] * 1300 / event.target.clientHeight))
+            // $('#x_lower').text(Math.round(selectedArea['x'] * 3 + relativeAreas.width * 1200 / event.target.naturalWidth))
+            // $('#y_lower').text(Math.round(selectedArea['y'] * 1300/451.5 + relativeAreas.height * 1300 / event.target.naturalHeight))
+            $('#x_lower').text(Math.round(selectedArea['x'] * 1200 / event.target.clientWidth + relativeAreas.width * 1200 / event.target.naturalWidth) === 1199 ? 1200 : Math.round(selectedArea['x'] * 1200 / event.target.clientWidth + relativeAreas.width * 1200 / event.target.naturalWidth))
+            $('#y_lower').text(Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight) === 1298 || Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight) === 1299 ? 1300 : Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight))
         }
 
     </script>
@@ -50,14 +52,13 @@
 
     <div class="image-decorator">
         <img alt="Image principale" id="example"
-             style="width: 500px; position: absolute;"
              class="blurred">
     </div>
 
     <div>
         <h3>show relative coordinates here</h3>
-        <p>x, y upper: <span id="x_lower">120</span>,<span id="y_lower">200</span></p>
-        <p>x, y lower: 120, 200</p>
+        <p>x, y upper: <span id="x_upper">615</span>,<span id="y_upper">628</span></p>
+        <p>x, y lower: <span id="x_lower">1035</span>,<span id="y_lower">1204</span></p>
     </div>
 
 </div>

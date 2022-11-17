@@ -245,7 +245,7 @@
             pickResizeHandler = function (event) {
                 cancelEvent(event);
                 focus();
-
+                // console.log("dddddddd", event)
                 var card = event.target.className.split(" ")[1];
                 if (card[card.length - 1] === "w") {
                     selectionOrigin[0] += area.width;
@@ -270,8 +270,8 @@
                 cancelEvent(event);
                 focus();
 
+                // console.log("sssssssssssss", event);
                 var mousePosition = getMousePosition(event);
-
                 // Get the selection size
                 var height = mousePosition[1] - selectionOrigin[1],
                     width = mousePosition[0] - selectionOrigin[0];
@@ -591,6 +591,7 @@
         if (this.options.width && this.$image.width() && this.options.width !== this.$image.width()) {
             this.ratio = this.options.width / this.$image.width();
             this.$image.width(this.options.width);
+            // console.log("this.options.width:",this.options.width,this.$image.width(this.options.width));
         }
 
         if (this.options.onChanging) {
