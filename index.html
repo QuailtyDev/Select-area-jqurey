@@ -31,9 +31,8 @@
 
         function debugQtyAreas(event, id, areas) {
             const selectedArea = areas[0];
-            console.log(event)
+
             var relativeAreas = $('img#example').selectAreas('relativeAreas')[0];
-            console.log(relativeAreas);
 
             $('#x_upper').text(Math.round(selectedArea['x'] * 1200 / event.target.clientWidth))
             $('#y_upper').text(Math.round(selectedArea['y'] * 1300 / event.target.clientHeight))
