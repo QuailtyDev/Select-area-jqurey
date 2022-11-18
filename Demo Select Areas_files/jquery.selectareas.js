@@ -852,7 +852,6 @@
                 image.src = currentObject.src;
 
             });
-            // console.log("this:",this)
             return this;
 
         } else {
