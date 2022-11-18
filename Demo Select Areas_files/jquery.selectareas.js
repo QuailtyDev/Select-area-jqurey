@@ -832,7 +832,6 @@
 
 
     $.fn.selectAreas = function(customOptions) {
-        // console.log(customOptions)
         if ( $.imageSelectAreas.prototype[customOptions] ) { // Method call
             var ret = $.imageSelectAreas.prototype[ customOptions ].apply( $.selectAreas(this), Array.prototype.slice.call( arguments, 1 ));
             return typeof ret === "undefined" ? this : ret;
