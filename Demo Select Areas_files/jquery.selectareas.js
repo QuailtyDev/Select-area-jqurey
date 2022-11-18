@@ -6,6 +6,7 @@
  */
 (function($) {
     $.imageArea = function(parent, id) {
+        // console.log(parent);
         var options = parent.options,
             $image = parent.$image,
             $trigger = parent.$trigger,
@@ -509,7 +510,7 @@
         }
 
         focus();
-
+        // console.log($image);
         return {
             getData: getData,
             startSelection: startSelection,
@@ -535,8 +536,9 @@
                 moveTo(point);
                 fireEvent("changed");
             },
-            set: function (dimensions, silent) {
+            set: function (dimensions, silent, parent) {
                 area = $.extend(area, dimensions);
+                // console.log(area,dimensions)
                 selectionOrigin[0] = area.x;
                 selectionOrigin[1] = area.y;
                 if (! silent) {
@@ -554,6 +556,7 @@
     $.imageSelectAreas = function() { };
 
     $.imageSelectAreas.prototype.init = function (object, customOptions) {
+        // console.log(object, customOptions)
         var that = this,
             defaultOptions = {
                 allowEdit: true,
@@ -571,7 +574,11 @@
                 overlayOpacity: 0.5,
                 areas: [],
                 onChanging: null,
-                onChanged: null
+                onChanged: null,
+                naturalWidth: 0,
+                naturalHeight: 0,
+                widthRatio: 1,
+                heightRatio: 1
             };
 
         this.options = $.extend(defaultOptions, customOptions);
@@ -584,12 +591,14 @@
 
         // Initialize the image layer
         this.$image = $(object);
-
+        // console.log(this.$image);
         this.ratio = 1;
+        this.options.widthRatio = this.options.width / this.$image[0].naturalWidth;
+        this.options.heightRatio = this.options.width / this.$image[0].naturalHeight;
+
         if (this.options.width && this.$image.width() && this.options.width !== this.$image.width()) {
             this.ratio = this.options.width / this.$image.width();
             this.$image.width(this.options.width);
-            // console.log("this.options.width:",this.options.width,this.$image.width(this.options.width));
         }
 
         if (this.options.onChanging) {
@@ -728,10 +737,15 @@
         }
         return id;
     };
-
+    
     $.imageSelectAreas.prototype.set = function (id, options, silent) {
+
         if (this._areas[id]) {
             options.id = id;
+            options.height=Math.round(options.height * this._areas[id].options.heightRatio)
+            options.width=Math.round(options.width * this._areas[id].options.widthRatio)
+            options.x=Math.round(options.x * this._areas[id].options.widthRatio)
+            options.y=Math.round(options.y * this._areas[id].options.heightRatio)
             this._areas[id].set(options, silent);
             this._areas[id].focus();
         }
@@ -821,6 +835,7 @@
 
     $.selectAreas = function(object, options) {
         var $object = $(object);
+
         if (! $object.data("mainImageSelectAreas")) {
             var mainImageSelectAreas = new $.imageSelectAreas();
             mainImageSelectAreas.init(object, options);
@@ -832,6 +847,7 @@
 
 
     $.fn.selectAreas = function(customOptions) {
+        // console.log("customOptions:", customOptions, "This:", this)
         if ( $.imageSelectAreas.prototype[customOptions] ) { // Method call
             var ret = $.imageSelectAreas.prototype[ customOptions ].apply( $.selectAreas(this), Array.prototype.slice.call( arguments, 1 ));
             return typeof ret === "undefined" ? this : ret;
@@ -841,7 +857,6 @@
             this.each(function() {
                 var currentObject = this,
                     image = new Image();
-                // console.log("currentObject:",currentObject,"image:", image);
                 // And attach selectAreas when the object is loaded
                 image.onload = function() {
                     $.selectAreas(currentObject, customOptions);
