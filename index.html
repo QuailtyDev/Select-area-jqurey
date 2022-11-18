@@ -13,7 +13,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('img#example').attr('src', './Demo Select Areas_files/balta_vyrnew_U98OChp%20(3).png');
-
             $('img#example').selectAreas({
                 minSize: [10, 10],
                 onChanged: debugQtyAreas,
@@ -31,18 +30,18 @@
 
         function debugQtyAreas(event, id, areas) {
             const selectedArea = areas[0];
-
             var relativeAreas = $('img#example').selectAreas('relativeAreas')[0];
 
-            $('#x_upper').text(Math.round(selectedArea['x'] * 1200 / event.target.clientWidth))
-            $('#y_upper').text(Math.round(selectedArea['y'] * 1300 / event.target.clientHeight))
-            // $('#x_lower').text(Math.round(selectedArea['x'] * 3 + relativeAreas.width * 1200 / event.target.naturalWidth))
-            // $('#y_lower').text(Math.round(selectedArea['y'] * 1300/451.5 + relativeAreas.height * 1300 / event.target.naturalHeight))
-            $('#x_lower').text(Math.round(selectedArea['x'] * 1200 / event.target.clientWidth + relativeAreas.width * 1200 / event.target.naturalWidth) === 1199 ? 1200 : Math.round(selectedArea['x'] * 1200 / event.target.clientWidth + relativeAreas.width * 1200 / event.target.naturalWidth))
-            $('#y_lower').text(Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight) === 1298 || Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight) === 1299 ? 1300 : Math.round(selectedArea['y'] * 1300/event.target.clientHeight + relativeAreas.height * 1300 / event.target.naturalHeight))
+            $('#x_upper').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth) + ",")
+            $('#y_upper').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight))
+            // $('#x_lower').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width))
+            // $('#y_lower').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height))
+            $('#x_lower').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) === (event.target.naturalWidth - 1) ? event.target.naturalWidth : Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) + ",")
+            $('#y_lower').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height) === (event.target.naturalHeight - 1) || Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height) === (event.target.naturalHeight-2) ? event.target.naturalHeight : Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height))
         }
 
     </script>
+
 </head>
 
 <body>
@@ -56,8 +55,8 @@
 
     <div>
         <h3>show relative coordinates here</h3>
-        <p>x, y upper: <span id="x_upper">615</span>,<span id="y_upper">628</span></p>
-        <p>x, y lower: <span id="x_lower">1035</span>,<span id="y_lower">1204</span></p>
+        <p>x, y upper: <span id="x_upper"></span><span id="y_upper"></span></p>
+        <p>x, y lower: <span id="x_lower"></span><span id="y_lower"></span></p>
     </div>
 
 </div>

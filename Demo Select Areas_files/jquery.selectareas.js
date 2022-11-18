@@ -832,6 +832,7 @@
 
 
     $.fn.selectAreas = function(customOptions) {
+        // console.log(customOptions)
         if ( $.imageSelectAreas.prototype[customOptions] ) { // Method call
             var ret = $.imageSelectAreas.prototype[ customOptions ].apply( $.selectAreas(this), Array.prototype.slice.call( arguments, 1 ));
             return typeof ret === "undefined" ? this : ret;
@@ -841,7 +842,7 @@
             this.each(function() {
                 var currentObject = this,
                     image = new Image();
-
+                // console.log("currentObject:",currentObject,"image:", image);
                 // And attach selectAreas when the object is loaded
                 image.onload = function() {
                     $.selectAreas(currentObject, customOptions);
@@ -851,6 +852,7 @@
                 image.src = currentObject.src;
 
             });
+            // console.log("this:",this)
             return this;
 
         } else {
