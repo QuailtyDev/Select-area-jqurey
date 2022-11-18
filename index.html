@@ -36,7 +36,7 @@
             $('#y_upper').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight))
             // $('#x_lower').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width))
             // $('#y_lower').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height))
-            $('#x_lower').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) === (event.target.naturalWidth - 1) ? event.target.naturalWidth : Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) + ",")
+            $('#x_lower').text(Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) === (event.target.naturalWidth - 1) ? event.target.naturalWidth + "," : Math.round(selectedArea['x'] * event.target.naturalWidth / event.target.clientWidth + relativeAreas.width) + ",")
             $('#y_lower').text(Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height) === (event.target.naturalHeight - 1) || Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height) === (event.target.naturalHeight-2) ? event.target.naturalHeight : Math.round(selectedArea['y'] * event.target.naturalHeight / event.target.clientHeight + relativeAreas.height))
         }
 
