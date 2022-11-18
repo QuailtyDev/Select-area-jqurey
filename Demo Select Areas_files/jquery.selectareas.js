@@ -245,7 +245,6 @@
             pickResizeHandler = function (event) {
                 cancelEvent(event);
                 focus();
-
                 var card = event.target.className.split(" ")[1];
                 if (card[card.length - 1] === "w") {
                     selectionOrigin[0] += area.width;
@@ -271,7 +270,6 @@
                 focus();
 
                 var mousePosition = getMousePosition(event);
-
                 // Get the selection size
                 var height = mousePosition[1] - selectionOrigin[1],
                     width = mousePosition[0] - selectionOrigin[0];
@@ -591,6 +589,7 @@
         if (this.options.width && this.$image.width() && this.options.width !== this.$image.width()) {
             this.ratio = this.options.width / this.$image.width();
             this.$image.width(this.options.width);
+            // console.log("this.options.width:",this.options.width,this.$image.width(this.options.width));
         }
 
         if (this.options.onChanging) {
@@ -833,6 +832,7 @@
 
 
     $.fn.selectAreas = function(customOptions) {
+        // console.log(customOptions)
         if ( $.imageSelectAreas.prototype[customOptions] ) { // Method call
             var ret = $.imageSelectAreas.prototype[ customOptions ].apply( $.selectAreas(this), Array.prototype.slice.call( arguments, 1 ));
             return typeof ret === "undefined" ? this : ret;
@@ -842,7 +842,7 @@
             this.each(function() {
                 var currentObject = this,
                     image = new Image();
-
+                // console.log("currentObject:",currentObject,"image:", image);
                 // And attach selectAreas when the object is loaded
                 image.onload = function() {
                     $.selectAreas(currentObject, customOptions);
@@ -852,6 +852,7 @@
                 image.src = currentObject.src;
 
             });
+            // console.log("this:",this)
             return this;
 
         } else {
