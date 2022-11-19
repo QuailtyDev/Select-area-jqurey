@@ -11,14 +11,18 @@
     <script src="./Demo Select Areas_files/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="./Demo Select Areas_files/jquery.selectareas.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var originalX = 285;
-        var originalY = 318;
-        var originalWidth = 465;
-        var originalHeight = 531;
+        var originalX = 281;
+        var originalY = 252;
+        var bottomX = 782;
+        var bottomY = 1165;
+        var originalWidth = bottomX - originalX;
+        var originalHeight = bottomY - originalY;
+        var imageInput = './Demo Select Areas_files/balta_vyrnew_U98OChp%20(3).png';
+
 
         $(document).ready(function () {
 
-            $('img#example').attr('src', './Demo Select Areas_files/balta_vyrnew_U98OChp%20(3).png');
+            $('img#example').attr('src', imageInput);
             $('img#example').selectAreas({
                 minSize: [10, 10],
                 onChanged: debugQtyAreas,

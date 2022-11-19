@@ -591,10 +591,10 @@
 
         // Initialize the image layer
         this.$image = $(object);
-        // console.log(this.$image);
+        // console.log(this.$image[0].naturalWidth, this.$image[0].naturalHeight);
         this.ratio = 1;
-        this.options.widthRatio = this.options.width / this.$image[0].naturalWidth;
-        this.options.heightRatio = this.options.width / this.$image[0].naturalHeight;
+        this.options.widthRatio = 400 / this.$image[0].naturalWidth;
+        this.options.heightRatio = 451 / this.$image[0].naturalHeight;
 
         if (this.options.width && this.$image.width() && this.options.width !== this.$image.width()) {
             this.ratio = this.options.width / this.$image.width();
